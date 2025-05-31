@@ -82,3 +82,87 @@ h1 {
     font-size: 4rem;
   }
 }
+
+.page-image-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem; /* Safe padding on both sides */
+  box-sizing: border-box;
+}
+
+.page-image {
+  width: 100%;
+  max-width: 90vw; /* Slightly smaller than full phone width */
+  height: auto;
+  border-radius: 12px;
+}
+
+.carousel-container {
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  touch-action: pan-y;
+  box-sizing: border-box;
+}
+
+.carousel-title {
+  text-align: center;
+  color: #035f9e;
+  font-size: 1.8rem;
+  margin: 1rem 0;
+  margin-top: 2rem;
+}
+
+.carousel-text {
+  text-align: center;
+  color: #1ca9c9;
+  font-size: 1rem;
+  padding: 0 1rem;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  width: 100vw;         /* Full screen width for proper snap */
+  display: flex;        /* Use flex to center image */
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide img {
+  width: 90vw;          /* Slightly smaller image */
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 12px;  /* Optional: slight rounding */
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;         /* slight reduction for tighter spacing */
+  position: relative;
+  top: -1rem;          /* move the dots closer to the image */
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #035f9e;
+}

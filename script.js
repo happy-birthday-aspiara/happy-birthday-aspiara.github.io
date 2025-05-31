@@ -67,3 +67,60 @@ window.addEventListener('DOMContentLoaded', () => {
     contentSection.style.minHeight = '100vh';
   }
 });
+
+function initCarousel(container) {
+  const track = container.querySelector('.carousel-track');
+  const slides = Array.from(container.querySelectorAll('.carousel-slide'));
+  const dots = Array.from(container.querySelectorAll('.dot'));
+
+  let currentIndex = 0;
+
+  function updateCarousel(index) {
+    const offset = -index * 100;
+    track.style.transform = `translateX(${offset}vw)`;
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel(currentIndex);
+  }
+
+  // Swipe logic
+  let startX = 0;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  track.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) {
+      prevSlide();
+    } else if (startX - endX > 50) {
+      nextSlide();
+    }
+  });
+
+  // Optional: click dots to navigate
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      currentIndex = i;
+      updateCarousel(currentIndex);
+    });
+  });
+
+  updateCarousel(currentIndex);
+}
+
+// Initialize all carousels on the page
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.carousel-container').forEach(initCarousel);
+});
