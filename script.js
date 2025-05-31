@@ -7,10 +7,10 @@ function createBalloon(emoji, left) {
   balloon.style.animationDuration = (6 + Math.random() * 6) + 's';
 
   balloon.addEventListener('click', () => {
-    const popSound = document.getElementById('pop-sound');
-    if (popSound) {
-      popSound.currentTime = 0;
-      popSound.play();
+    const original = document.getElementById('pop-sound');
+    if (original) {
+      const popClone = original.cloneNode(true);
+      popClone.play();
     }
     balloon.remove();
   });
